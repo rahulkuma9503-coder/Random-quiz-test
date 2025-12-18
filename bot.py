@@ -711,14 +711,17 @@ class QuizBot:
         options_text = "\n".join([f"• {option}" for option in quiz_info['options']])
         correct_answer = quiz_info['options'][quiz_info['correct_option_id']]
         
+        # Handle username display
+        username = quiz_info['reported_by']['username']
+        username_display = f" (@{username})" if username else ""
+        
         report_text = (
             f"⚠️ **QUIZ REPORTED FOR REVIEW**\n\n"
             f"📝 **Question:** {quiz_info['question']}\n\n"
             f"📋 **Options:**\n{options_text}\n\n"
             f"✅ **Correct Answer:** {correct_answer}\n\n"
             f"📊 **Report Details:**\n"
-            f"• 👤 Reported by: {quiz_info['reported_by']['first_name']}"
-            f"{f' (@{quiz_info['reported_by']['username']})' if quiz_info['reported_by']['username'] else ''}\n"
+            f"• 👤 Reported by: {quiz_info['reported_by']['first_name']}{username_display}\n"
             f"• 👥 Group: {quiz_info['group_name']}\n"
             f"• 🕐 Time: {datetime.fromisoformat(quiz_info['report_time']).strftime('%Y-%m-%d %H:%M:%S')}\n"
             f"• 🔗 Message: [View Original]({quiz_info['original_message_link']})\n\n"
@@ -1038,14 +1041,17 @@ class QuizBot:
         options_text = "\n".join([f"• {option}" for option in report['options']])
         correct_answer = report['options'][report['correct_option_id']]
         
+        # Handle username display
+        username = report['reported_by']['username']
+        username_display = f" (@{username})" if username else ""
+        
         report_text = (
             f"⚠️ **QUIZ REPORTED FOR REVIEW**\n\n"
             f"📝 **Question:** {report['question']}\n\n"
             f"📋 **Options:**\n{options_text}\n\n"
             f"✅ **Correct Answer:** {correct_answer}\n\n"
             f"📊 **Report Details:**\n"
-            f"• 👤 Reported by: {report['reported_by']['first_name']}"
-            f"{f' (@{report['reported_by']['username']})' if report['reported_by']['username'] else ''}\n"
+            f"• 👤 Reported by: {report['reported_by']['first_name']}{username_display}\n"
             f"• 👥 Group: {report['group_name']}\n"
             f"• 🕐 Time: {datetime.fromisoformat(report['report_time']).strftime('%Y-%m-%d %H:%M:%S')}\n"
             f"• 🔗 Message: [View Original]({report['original_message_link']})\n\n"
